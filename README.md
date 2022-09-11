@@ -25,7 +25,7 @@ devtools::install_github("debruine/demopkg")
 ``` r
 library(demopkg)
 
-# load data from DeBruine (2004)
+# load attractiveness judgement data 
 data("self_res_att")
 ```
 
