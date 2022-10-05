@@ -3,8 +3,11 @@ DAte: 2022-10-05
 Title: Data and analysis from DeBruine (2004)
 Version: 0.0.0.9000
 Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person(given = "Lisa",
+           family = "DeBruine",
+           role = c("aut", "cre"),
+           email = "debruine@gmail.com",
+           comment = c(ORCID = "0000-0002-7523-5539"))
 Description: Provide data and analysis code for the paper Facial resemblance increases the attractiveness of same-sex faces more than other-sex faces (DeBruine, 2004). 
 License: GPL (>= 3)
 Encoding: UTF-8
