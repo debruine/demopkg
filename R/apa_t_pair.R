@@ -1,8 +1,9 @@
 #' APA text for Paired-Samples T-Test
 #'
+#' @description
 #' Create APA-formatted text for the results of an independent-samples t-test in the following format:
 #'
-#' A paired-samples t-test was conducted to compare {dv} between {level1} (M = {mean1}, SD = {sd1}) and {level2} (M = {mean2}, SD = {sd2}). There was a {non}significant difference; t({df}) = {t_value}, p = {p_value}.
+#' A paired-samples t-test was conducted to compare \{dv\} between \{level1\} (M = \{mean1\}, SD = \{sd1\}) and \{level2\} (M = \{mean2\}, SD = \{sd2\}). There was a \{non\}significant difference; t(\{df\}) = \{t_value\}, p = \{p_value\}.
 #'
 #' @param x A vector of the values for level 1.
 #' @param y A vector of the values for level 2.
@@ -30,21 +31,42 @@ apa_t_pair <- function(x, y,
                        level2 = "level 2") {
   # warn about identical values
   if (all(x == y)) {
-    warning("The values for x and y should probably not be identical.")
+    stop("x and y cannot be identical")
   }
 
   t_results <- t.test(x, y, paired = TRUE)
 
   template <- "A paired-samples t-test was conducted to compare {dv} between {level1} (M = {mean1}, SD = {sd1}) and {level2} (M = {mean2}, SD = {sd2}). There was a {non}significant difference; t({df}) = {t_value}, p = {p_value}."
 
-  glue::glue(template,
-             mean1   = mean(x) |> round(1),
-             sd1     = sd(x) |> round(1),
-             mean2   = mean(y) |> round(1),
-             sd2     = sd(y) |> round(1),
-             non     = ifelse(t_results$p.value < .05, "", "non-"),
-             df      = t_results$parameter |> round(1),
-             t_value = t_results$statistic |> round(2),
-             p_value = t_results$p.value |> round(3)
+  # p <- if (t_results$p.value < .001) {
+  #   "p < .001"
+  # } else {
+  #   paste("p =", round0(t_results$p.value, 3))
+  # }
+
+  glue::glue(
+    template,
+    mean1   = round0(mean(x), 1),
+    sd1     = round0(sd(x), 1),
+    mean2   = round0(mean(y), 1),
+    sd2     = round0(sd(y), 1),
+    non     = ifelse(t_results$p.value < .05, "", "non-"),
+    df      = round0(t_results$parameter, 0),
+    t_value = round0(t_results$statistic, 2),
+    p_value = round0(t_results$p.value, 3)
   )
+}
+
+
+#' Round with Trailing Zeroes
+#'
+#' @param x a numeric vector
+#' @param digits integer indicating the number of decimal places to be used.
+#'
+#' @return character string of formatted number
+round0 <- function(x, digits = 0) {
+  fmt <- paste0("%.", digits, "f")
+  x0 <- sprintf(fmt, x)
+
+  return(x0)
 }

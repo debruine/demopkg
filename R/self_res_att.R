@@ -1,6 +1,6 @@
 #' Attractiveness of Self-Resembling Faces.
 #'
-#' Attractiveness judgements of same-sex and other-sex self-resembling faces from DeBruine (2004).
+#' Attractiveness judgments of same-sex and other-sex self-resembling faces from DeBruine (2004).
 #'
 #' @format A data frame with 108 rows and 16 variables:
 #' \describe{

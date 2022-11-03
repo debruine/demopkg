@@ -32,6 +32,6 @@ A data frame with 108 rows and 16 variables:
 self_res_att
 }
 \description{
-Attractiveness judgements of same-sex and other-sex self-resembling faces from DeBruine (2004).
+Attractiveness judgments of same-sex and other-sex self-resembling faces from DeBruine (2004).
 }
 \keyword{datasets}
